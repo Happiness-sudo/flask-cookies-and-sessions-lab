@@ -1,10 +1,22 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from marshmallow import Schema, fields
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
+
+
+class Article(db.Model):
+    __tablename__ = 'articles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.String)   # ✅ REQUIRED
+    title = db.Column(db.String)
+    content = db.Column(db.String)
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
+
 
 db = SQLAlchemy(metadata=metadata)
 
